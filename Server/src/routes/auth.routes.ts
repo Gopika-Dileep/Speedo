@@ -13,5 +13,6 @@ export class AuthRouter{
     private _initializeRoutes():void{
         this.router.post('/login', validation  ,authController.login )
         this.router.post('/logout', validation , authController.logout)
+        this.router.post('/refresh',authController.refresh)
     }
 }
