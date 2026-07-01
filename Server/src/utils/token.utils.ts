@@ -1,0 +1,22 @@
+import jwt from 'jsonwebtoken'
+import {env} from  '../config/env'
+
+export const generateAccessToken = (userId:string,name:string)=>{
+    return jwt.sign({id:userId , name},env.ACCESS_TOKEN_SECRET ,{
+        expiresIn:env.ACCESS_TOKEN_EXPIRY as jwt.SignOptions['expiresIn']
+    })
+}
+
+export const generateRefreshToken = (userId:string)=>{
+    return jwt.sign({id:userId},env.REFRESH_TOKEN_SECRET,{
+        expiresIn:env.REFRESH_TOKEN_EXPIRY as jwt.SignOptions['expiresIn']
+    })
+}
+
+export const verifyAccessToken = (token:string):{id:string; name:string} =>{
+    return jwt.verify(token , env.ACCESS_TOKEN_SECRET) as {id:string; name:string};
+}
+
+export const verifyRefreshToken = (token:string):{id:string}=>{
+    return jwt.verify(token ,env.REFRESH_TOKEN_SECRET) as {id:string}
+}
