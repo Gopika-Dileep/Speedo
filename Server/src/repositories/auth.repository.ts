@@ -3,6 +3,9 @@ import { IUser,userModel } from "../models/user.model";
 
 
 export class AuthRepository implements IAuthRepository{
+    async findById(id: string): Promise<IUser | null> {
+        return await userModel.findById(id)
+    }
     async findByEmail(email: string): Promise<IUser | null> {
         return await userModel.findOne({email})
     }
