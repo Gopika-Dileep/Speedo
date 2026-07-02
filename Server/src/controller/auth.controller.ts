@@ -28,7 +28,7 @@ export  class AuthController{
             const result = await this._refreshService.execute(refreshToken)
             res.status(200).json({success:true , user:result.user , accessToken:result.accessToken})
         }catch(error){
-
+            res.status(401).json({success:false,message: error instanceof Error? error.message:"something went wrong"})
         }
     }
 
