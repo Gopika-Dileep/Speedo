@@ -15,5 +15,7 @@ export class TripRouter{
 
     private _initializeRoutes():void{
         this.router.post('/upload',authMiddleware,upload.single("file"),tripController.uplaodTrip)
+        this.router.get('/trips',authMiddleware , tripController.listTrips)
+        this.router.get('/tripdetails/:tripId' , authMiddleware , tripController.tripDetails)
     }
 }

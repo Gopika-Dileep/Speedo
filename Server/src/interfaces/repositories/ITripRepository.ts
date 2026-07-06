@@ -1,3 +1,4 @@
+import { IGPSData } from "../../models/gpsdata.model";
 import { ITrip } from "../../models/trip.model"
 import { ParsedGPSData } from '../../types/gps.types';
 
@@ -7,4 +8,7 @@ export interface ITripRepository {
         overspeedDuration:number;overspeedDistance?:number;totalPoints?:number;
     }): Promise<ITrip>;
     saveGPSData(tripId: string, gpsData: ParsedGPSData[]): Promise<void>
+    findTripByUserId(userId:string):Promise<ITrip[]>
+    findTripById(tripId:string) :Promise<ITrip| null>
+    findGpsByTripId(tripId:string):Promise<IGPSData[]>
 }
