@@ -1,5 +1,5 @@
-import { ITrip } from "../../../models/trip.model";
+import { TripDTO } from "../../../dtos/trip.dto";
 
-export interface ITripsService{
-    execute(userId:string):Promise<ITrip[]>
+export interface ITripsService {
+    execute(userId: string): Promise<TripDTO[]>;
 }

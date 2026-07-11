@@ -1,12 +1,5 @@
-import { IGPSData } from "../../../models/gpsdata.model"
-import { ITrip } from "../../../models/trip.model"
+import { TripDetailResponseDTO } from "../../../dtos/trip.dto";
 
-
-
-export interface ITripDetailResponse{
-    trip:ITrip,
-    gpsData:IGPSData[]
-}
 export interface ITripdetailsService {
-    execute(tripId:string , userId:string):Promise<ITripDetailResponse>
+    execute(tripId: string, userId: string): Promise<TripDetailResponseDTO>;
 }

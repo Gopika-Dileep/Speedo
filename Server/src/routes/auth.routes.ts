@@ -2,6 +2,8 @@ import { Router } from "express";
 import { authController } from "../di/auth.di";
 import { validation } from "../middleware/validation";
 
+import { ROUTES } from "../constants/routes";
+
 export class AuthRouter{
     public router: Router;
 
@@ -11,8 +13,8 @@ export class AuthRouter{
     }
 
     private _initializeRoutes():void{
-        this.router.post('/login', validation  ,authController.login )
-        this.router.post('/logout' , authController.logout)
-        this.router.post('/refresh',authController.refresh)
+        this.router.post(ROUTES.AUTH.LOGIN, validation  ,authController.login )
+        this.router.post(ROUTES.AUTH.LOGOUT , authController.logout)
+        this.router.post(ROUTES.AUTH.REFRESH,authController.refresh)
     }
 }
