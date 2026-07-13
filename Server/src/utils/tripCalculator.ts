@@ -1,4 +1,4 @@
-import geolib from 'geolib'
+import * as geolib from 'geolib'
 import { ParsedGPSData } from '../types/gps.types'
 
 

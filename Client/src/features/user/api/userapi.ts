@@ -30,3 +30,8 @@ export const tripDetails = async (tripId: string): Promise<{ success: boolean; r
     const response = await axiosInstance.get(`/trip/tripdetails/${validated.tripId}`);
     return response.data;
 };
+
+export const deleteTrip = async (tripId: string): Promise<{ success: boolean; message: string }> => {
+    const response = await axiosInstance.delete(`/trip/delete/${tripId}`);
+    return response.data;
+};

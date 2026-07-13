@@ -11,4 +11,5 @@ export interface ITripRepository {
     findTripByUserId(userId:string):Promise<ITrip[]>
     findTripById(tripId:string) :Promise<ITrip| null>
     findGpsByTripId(tripId:string):Promise<IGPSData[]>
+    deleteTrip(tripId:string):Promise<void>
 }

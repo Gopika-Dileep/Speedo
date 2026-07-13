@@ -9,6 +9,7 @@ export const ROUTES = {
         BASE: "/api/trip",
         UPLOAD: "/upload",
         LIST: "/trips",
-        DETAILS: "/tripdetails/:tripId"
+        DETAILS: "/tripdetails/:tripId",
+        DELETE: "/delete/:tripId"
     }
 };

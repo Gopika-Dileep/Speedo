@@ -27,4 +27,9 @@ export class TripRepository implements ITripRepository{
     async findGpsByTripId(tripId: string): Promise<IGPSData[]> {
         return await gpsdataModel.find({tripId: new Types.ObjectId(tripId)})
     }
+
+    async deleteTrip(tripId: string): Promise<void> {
+        await tripModel.findByIdAndDelete(tripId);
+        await gpsdataModel.deleteMany({ tripId: new Types.ObjectId(tripId) });
+    }
 }

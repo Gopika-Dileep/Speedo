@@ -17,5 +17,6 @@ export class TripRouter {
         this.router.post(ROUTES.TRIP.UPLOAD, authMiddleware, upload.single("file"), tripController.uploadTrip)
         this.router.get(ROUTES.TRIP.LIST, authMiddleware, tripController.listTrips)
         this.router.get(ROUTES.TRIP.DETAILS, authMiddleware, tripController.tripDetails)
+        this.router.delete(ROUTES.TRIP.DELETE, authMiddleware, tripController.deleteTrip)
     }
 }

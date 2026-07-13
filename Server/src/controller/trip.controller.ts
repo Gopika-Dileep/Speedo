@@ -10,22 +10,20 @@ export class TripController {
     uploadTrip = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const { tripName } = req.body
-            await this._tripuploadService.execute(req.file!, req.userId!, tripName)
+            await this._tripuploadService.execute(req.file!, req.userId as string, tripName)
             res.status(200).json({ success: true, message: SUCCESS_MESSAGES.UPLOAD_SUCCESS })
         } catch (error) {
-            res.status(401).json({ success: false, message: error instanceof Error ? error.message : ERROR_MESSAGES.SOMETHING_WENT_WRONG })
-
+            // Using 400 Bad Request for file processing/validation failures so it doesn't trigger the 401 refresh token interceptor
+            res.status(400).json({ success: false, message: error instanceof Error ? error.message : ERROR_MESSAGES.SOMETHING_WENT_WRONG })
         }
     }
 
     listTrips = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-
             const result = await this._tripsService.execute(req.userId!)
             res.status(200).json({ success: true, result })
-
         } catch (error) {
-            res.status(401).json({ success: false, message: error instanceof Error ? error.message : ERROR_MESSAGES.SOMETHING_WENT_WRONG })
+            res.status(500).json({ success: false, message: error instanceof Error ? error.message : ERROR_MESSAGES.SOMETHING_WENT_WRONG })
         }
     }
 
@@ -33,9 +31,19 @@ export class TripController {
         try {
             const tripId = req.params.tripId
             const result = await this._tripdetailsService.execute(tripId.toString(), req.userId!)
-            res.status(200).json({ succes: true, result })
+            res.status(200).json({ success: true, result })
         } catch (error) {
-            res.status(401).json({ success: false, message: error instanceof Error ? error.message : ERROR_MESSAGES.SOMETHING_WENT_WRONG })
+            res.status(500).json({ success: false, message: error instanceof Error ? error.message : ERROR_MESSAGES.SOMETHING_WENT_WRONG })
+        }
+    }
+
+    deleteTrip = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const tripId = req.params.tripId
+            await this._tripsService.delete(tripId.toString(), req.userId as string)
+            res.status(200).json({ success: true, message: "Trip deleted successfully" })
+        } catch (error) {
+            res.status(500).json({ success: false, message: error instanceof Error ? error.message : ERROR_MESSAGES.SOMETHING_WENT_WRONG })
         }
     }
 }

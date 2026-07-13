@@ -10,4 +10,15 @@ export class TripsService implements ITripsService {
         const trips = await this._tripRepo.findTripByUserId(userId);
         return trips.map(trip => TripMapper.toTripDTO(trip));
     }
+
+    async delete(tripId: string, userId: string): Promise<void> {
+        const trip = await this._tripRepo.findTripById(tripId);
+        if (!trip) {
+            throw new Error("Trip not found");
+        }
+        if (trip.userId.toString() !== userId) {
+            throw new Error("Unauthorized to delete this trip");
+        }
+        await this._tripRepo.deleteTrip(tripId);
+    }
 }
