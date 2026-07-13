@@ -7,7 +7,11 @@ export const transformGPSData = (
     latitude: Number(row.latitude),
     longitude: Number(row.longitude),
     timestamp: new Date(row.timestamp),
-    ignition: row.ignition.toLowerCase() === "true",
+    ignition: typeof row.ignition === "string" && (
+      row.ignition.trim().toLowerCase() === "true" ||
+      row.ignition.trim().toLowerCase() === "on" ||
+      row.ignition.trim() === "1"
+    ),
     calculatedSpeed: 0,
   }));
 };
