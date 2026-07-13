@@ -7,7 +7,7 @@ function getEnv(key:string):string{
 }
 
 export const env = {
-    PORT:getEnv('PORT'),
+    PORT: process.env.PORT || '5000',
     MONGO_URI: getEnv('MONGO_URI'),
     FRONTEND_URL : getEnv('FRONTEND_URL'),
     ACCESS_TOKEN_SECRET: getEnv('ACCESS_TOKEN_SECRET'),

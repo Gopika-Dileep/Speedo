@@ -28,4 +28,8 @@ class ServerApp{
     }
 }
 
-new ServerApp().start();
+if (!process.env.VERCEL) {
+    new ServerApp().start();
+}
+
+export default appinstance.app;
